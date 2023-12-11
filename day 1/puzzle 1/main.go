@@ -26,15 +26,15 @@ func readInputFile() (string, error) {
 
 }
 
-func extractNumbersFromText(text string) []int {
-	foundNumbers := []int{}
+func extractNumbersFromText(text string) []string {
+	foundNumbers := []string{}
 	for _, char := range text {
-		number, err := strconv.Atoi(string(char))
+		_, err := strconv.Atoi(string(char))
 		if err != nil {
 			continue
 		}
 
-		foundNumbers = append(foundNumbers, number)
+		foundNumbers = append(foundNumbers, string(char))
 	}
 	return foundNumbers
 }
@@ -53,8 +53,8 @@ func main() {
 			continue
 		}
 
-		firstNumber := strconv.Itoa(extractedNumbers[0])
-		lastNumber := strconv.Itoa(extractedNumbers[len(extractedNumbers)-1])
+		firstNumber := extractedNumbers[0]
+		lastNumber := extractedNumbers[len(extractedNumbers)-1]
 
 		finalNumber, err := strconv.Atoi(firstNumber + lastNumber)
 		if err != nil {
