@@ -27,7 +27,7 @@ func readInputFile() (string, error) {
 
 }
 
-func getMinAndMaxIndex(m map[int]string) map[string]int {
+func getMinAndMaxIndex(m map[int]string) map[string]int{
 	var min, max int
 	for k := range m {
 		min = k
@@ -64,27 +64,23 @@ func extractNumbersFromText(text string) map[int]string {
 	foundNumbers := map[int]string{}
 	for i, char := range text {
 		_, err := strconv.Atoi(string(char))
-		if err != nil {
-			continue
+		if err == nil {
+			foundNumbers[i] = string(char)
 		}
-
-		foundNumbers[i] = string(char)
 	}
 
 	// to find textual numbers
-	for i := 0; i < len(textualNumbers); i++ {
-		firstOccurrenceIndex := firstIndexOf(text, textualNumbers[i])
-		if firstOccurrenceIndex == -1 {
-			continue
-		}
-		foundNumbers[firstOccurrenceIndex] = strconv.Itoa(i + 1)
+    for i := 0; i < len(textualNumbers); i++ {
+    	firstOccurrenceIndex := firstIndexOf(text, textualNumbers[i])
+    	if firstOccurrenceIndex == -1 {continue}
+    	foundNumbers[firstOccurrenceIndex] = strconv.Itoa(i+1)
 
-		lastOccurrenceIndex := lastIndexOf(text, textualNumbers[i])
-		if lastOccurrenceIndex != firstOccurrenceIndex {
-			foundNumbers[lastOccurrenceIndex] = strconv.Itoa(i + 1)
-		}
+    	lastOccurrenceIndex := lastIndexOf(text, textualNumbers[i])
+    	if lastOccurrenceIndex != firstOccurrenceIndex {
+    		foundNumbers[lastOccurrenceIndex] = strconv.Itoa(i+1)
+    	}
 
-	}
+    }
 
 	return foundNumbers
 }
